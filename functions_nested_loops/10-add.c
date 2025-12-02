@@ -1,5 +1,4 @@
-#include "main.hO
-"
+#include "main.h"
 
 /**
  * add - adds two integers
