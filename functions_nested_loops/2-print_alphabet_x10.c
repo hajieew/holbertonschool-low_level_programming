@@ -3,7 +3,7 @@
 /**
  * print_alphabet - prints the alphabet in lowercase
  */
-void print_alphabet(void)
+void print_alphabet_x10(void)
 {
 	int a = 1;
 	while (a <= 10)
@@ -17,6 +17,6 @@ void print_alphabet(void)
 		}
 
 		_putchar('\n');
-		a++
+		a++;
 	}
 }
