@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * _isdgit - checks if input is number or not
+ * _isdigit - checks if input is number or not
  * @c: the character to check
  *
  * Return: 1 if input is numbers, otherwise 0
