@@ -1,4 +1,4 @@
-#include <stdio.h>
+ #include <stdio.h>
 
 /**
  * main - prints all single-digit numbers of base 10
@@ -12,8 +12,10 @@ int main(void)
 	{
 		putchar(i + '0');
 		if (i != 9)
-			putchar(',')
-			putchar(' ')
+		{
+			putchar(',');
+			putchar(' ');
+		}
 	}
 	putchar('\n');
 	return (0);
