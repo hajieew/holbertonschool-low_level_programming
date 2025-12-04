@@ -2,8 +2,10 @@
 
 /**
  * print_line - a function that draws a straight line
- *
  * @n - the number of '_'
+ *
+ * Description: This function prints the character '_' n times,
+ * followed by a new line. If n is 0 or less, it only prints a new line.
  */
 
 void print_line(int n)
