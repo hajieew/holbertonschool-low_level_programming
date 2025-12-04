@@ -16,8 +16,8 @@ void print_line(int n)
 			s++;
 		}
 		else
-			_putchar('\n')
+			_putchar('\n');
 	}
 
-	_putchar('\n')
+	_putchar('\n');
 }
