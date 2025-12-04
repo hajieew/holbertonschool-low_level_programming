@@ -3,7 +3,7 @@
 /**
  * print_line - a function that draws a straight line
  *
- * n - the number of '_'
+ * @n - the number of '_'
  */
 
 void print_line(int n)
