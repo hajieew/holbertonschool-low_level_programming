@@ -1,24 +1,41 @@
 #include "main.h"
-#include <unistd.h>
 
 /**
+ * times_table - prints the 9 times table starting from 0
  *
+ * Return: void
  */
-void print_number(int n);
-
 void times_table(void)
 {
-    int a, b;
+	int a, b, c;
 
-    for (a = 0; a <= 9; a++)
-    {
-        for (b = 0; b <= 9; b++)
-        {
-            print_number(a * b);
+	for (a = 0; a <= 9; a++)
+	{
+		for (b = 0; b <= 9; b++)
+		{
+			c = a * b;
 
-            if (b < 9)
-                write(1, ", ", 2);
-        }
-        write(1, "\n", 1);
-    }
+			if (b == 0)
+			{
+				_putchar(c + '0');
+			}
+			else
+			{
+				_putchar(',');
+				_putchar(' ');
+
+				if (c < 10)
+				{
+					_putchar(' ');
+					_putchar(c + '0');
+				}
+				else
+				{
+					_putchar((c / 10) + '0');
+					_putchar((c % 10) + '0');
+				}
+			}
+		}
+		_putchar('\n');
+	}
 }
