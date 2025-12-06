@@ -4,6 +4,8 @@
 /**
  *
  */
+void print_number(int n);
+
 void times_table(void)
 {
     int a, b;
