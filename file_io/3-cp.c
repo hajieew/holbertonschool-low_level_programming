@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
     while ((rd_bytes = read(fd_from, buffer, 1024)) > 0)
     {
         wr_bytes = write(fd_to, buffer, rd_bytes);
-        if (wr_bytes != rd_bytes)
+        if (wr_bytes == -1 || wr_bytes != rd_bytes)
         {
             dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
             close(fd_from);
