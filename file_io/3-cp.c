@@ -5,18 +5,50 @@
 
 #define BUFFER_SIZE 1024
 
+void close_file_or_exit(int fd)
+{
+	if (close(fd) == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
+		exit(100);
+	}
+}
+
+void copy_file(int fd_from, int fd_to, const char *from_name, const char *to_name)
+{
+	ssize_t r, w;
+	char buffer[BUFFER_SIZE];
+
+	while ((r = read(fd_from, buffer, BUFFER_SIZE)) > 0)
+	{
+		w = write(fd_to, buffer, r);
+		if (w == -1 || w != r)
+		{
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", to_name);
+			close_file_or_exit(fd_from);
+			close_file_or_exit(fd_to);
+			exit(99);
+		}
+	}
+	if (r == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", from_name);
+		close_file_or_exit(fd_from);
+		close_file_or_exit(fd_to);
+		exit(98);
+	}
+}
+
 /**
  * main - Copies the content of a file to another file.
  * @argc: Number of arguments
  * @argv: Arguments vector
  *
- * Return: 0 on success, exits with codes 97-100 on failure.
+ * Return: 0 on success, exits with codes 97-100 on failure
  */
 int main(int argc, char *argv[])
 {
 	int fd_from, fd_to;
-	ssize_t r, w;
-	char buffer[BUFFER_SIZE];
 
 	if (argc != 3)
 	{
@@ -35,42 +67,14 @@ int main(int argc, char *argv[])
 	if (fd_to == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-		close(fd_from);
+		close_file_or_exit(fd_from);
 		exit(99);
 	}
 
-	while ((r = read(fd_from, buffer, BUFFER_SIZE)) > 0)
-	{
-		w = write(fd_to, buffer, r);
-		if (w == -1 || w != r)
-		{
-			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-			close(fd_from);
-			close(fd_to);
-			exit(99);
-		}
-	}
+	copy_file(fd_from, fd_to, argv[1], argv[2]);
 
-	if (r == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-		close(fd_from);
-		close(fd_to);
-		exit(98);
-	}
-
-	if (close(fd_from) == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_from);
-		close(fd_to);
-		exit(100);
-	}
-
-	if (close(fd_to) == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_to);
-		exit(100);
-	}
+	close_file_or_exit(fd_from);
+	close_file_or_exit(fd_to);
 
 	return (0);
 }
