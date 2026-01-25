@@ -5,21 +5,33 @@
 #include <string.h>
 #include <stdio.h>
 
-/* Node for the hash table */
+/**
+ * struct hash_node_s - Node of a hash table
+ *
+ * @key: The key, string
+ * @value: Value associated with the key
+ * @next: Pointer to the next node
+ */
 typedef struct hash_node_s
 {
-    char *key;
-    char *value;
-    struct hash_node_s *next;
+	char *key;
+	char *value;
+	struct hash_node_s *next;
 } hash_node_t;
 
-/* Hash table structure */
+/**
+ * struct hash_table_s - Hash table data structure
+ *
+ * @size: size of the array
+ * @array: Array of size @size
+ */
 typedef struct hash_table_s
 {
-    unsigned long int size;
-    hash_node_t **array;
+	unsigned long int size;
+	hash_node_t **array;
 } hash_table_t;
 
 hash_table_t *hash_table_create(unsigned long int size);
 
 #endif
+
